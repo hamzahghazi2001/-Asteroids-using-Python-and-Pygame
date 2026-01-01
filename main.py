@@ -1,6 +1,8 @@
 import pygame
+from player import Player
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
 from logger import log_state
+
 
 def main():
     pygame.init()
@@ -8,14 +10,21 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
+    clock = pygame.time.Clock()
+    dt=0
+    player1= Player((SCREEN_WIDTH/2),(SCREEN_HEIGHT/2))
     while True:
         log_state()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return        
         screen.fill("black", rect=None, special_flags=0)
-        pygame.display.update()
+        player1.draw(screen)
+        pygame.display.flip()
+        clock.tick_busy_loop(60)
+        dt = (clock.tick())/1000
+        # print(dt)
+    
      
 
 
